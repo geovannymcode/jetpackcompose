@@ -1,6 +1,7 @@
 package com.geovannycode.composecourse2024
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -79,7 +80,10 @@ fun MyBox(){
 
 @Composable
 fun MyRows() {
-    Row {
+    Row(modifier = Modifier
+        .fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly) {
         Box(modifier = Modifier
             .width(80.dp)
             .height(80.dp)
