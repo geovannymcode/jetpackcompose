@@ -16,7 +16,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.geovannycode.composecourse2024.composables.TextBasic
 import com.geovannycode.composecourse2024.exercises.CardPresentation
+import com.geovannycode.composecourse2024.exercises.CounterContent
 import com.geovannycode.composecourse2024.ui.theme.ComposeCourse2024Theme
 
 class MainActivity : ComponentActivity() {
@@ -24,10 +26,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            Box(modifier = Modifier.fillMaxSize().padding(16.dp),
+            //CounterContent()
+            TextBasic()
+           /* Box(modifier = Modifier.fillMaxSize().padding(16.dp),
                 contentAlignment = Alignment.Center) {
-                CardPresentation()
-            }
+                CardPresentation(name = "Geovanny Mendoza",
+                    email = "gmendoza@gmail.com",
+                    image = R.drawable.avatar)
+            }*/
            // MyFirstComposable(name = "JetPack Compose")
             /*ComposeCourse2024Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

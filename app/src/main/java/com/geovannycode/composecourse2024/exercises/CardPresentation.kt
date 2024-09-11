@@ -1,6 +1,7 @@
 package com.geovannycode.composecourse2024.exercises
 
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -30,7 +31,11 @@ import androidx.compose.ui.unit.sp
 import com.geovannycode.composecourse2024.R
 
 @Composable
-fun CardPresentation() {
+fun CardPresentation(
+    name:String,
+    email:String,
+    @DrawableRes image:Int
+) {
 
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -38,7 +43,7 @@ fun CardPresentation() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
             ){
             Image(painter = painterResource(id = R.drawable.avatar)
-                , contentDescription = "Avatar",
+                , contentDescription = image.toString(),
                 modifier = Modifier
                     .size(100.dp)
                     .clip(CircleShape)
@@ -47,7 +52,7 @@ fun CardPresentation() {
             )
             Column(modifier = Modifier.weight(1f)){
                 Text(
-                    text = "Geovanny Mendoza",
+                    text = name,
                     style = TextStyle(
                         fontSize = 18.sp,
                         color = Color.White,
@@ -57,7 +62,7 @@ fun CardPresentation() {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Geovanny@gmail.com",
+                    text = email,
                     style = TextStyle(
                         fontSize = 15.sp,
                         color = Color.White,
@@ -83,5 +88,9 @@ fun CardPresentation() {
 @Preview(name = "CardPresentation")
 @Composable
 fun CardPresentationPreview(){
-CardPresentation()
+CardPresentation(
+    name = "Geovanny Mendoza",
+    email = "gmendoza@gmail.com",
+    image = R.drawable.avatar
+)
 }
