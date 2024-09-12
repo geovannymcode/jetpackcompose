@@ -16,9 +16,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.geovannycode.composecourse2024.composables.RadioButtonComponent
 import com.geovannycode.composecourse2024.composables.TextBasic
 import com.geovannycode.composecourse2024.exercises.CardPresentation
 import com.geovannycode.composecourse2024.exercises.CounterContent
+import com.geovannycode.composecourse2024.exercises.VisibilityComponent
 import com.geovannycode.composecourse2024.ui.theme.ComposeCourse2024Theme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +29,9 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             //CounterContent()
-            TextBasic()
+            //TextBasic()
+            RadioButtonComponent()
+            //VisibilityComponent()
            /* Box(modifier = Modifier.fillMaxSize().padding(16.dp),
                 contentAlignment = Alignment.Center) {
                 CardPresentation(name = "Geovanny Mendoza",
