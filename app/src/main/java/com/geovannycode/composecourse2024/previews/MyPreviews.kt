@@ -17,3 +17,8 @@ annotation class MyPreviewDefault
     device = Devices.NEXUS_10
 )
 annotation class MyPreviewDefaultN10
+
+@Preview(
+    name = "Preview"
+)
+annotation class MyPreviewWithoutBackground
