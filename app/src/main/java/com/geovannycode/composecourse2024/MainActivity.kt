@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.geovannycode.composecourse2024.composables.PokedexScreen
 import com.geovannycode.composecourse2024.composables.RadioButtonComponent
 import com.geovannycode.composecourse2024.composables.TextBasic
 import com.geovannycode.composecourse2024.exercises.CardPresentation
@@ -30,7 +31,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             //CounterContent()
             //TextBasic()
-            RadioButtonComponent()
+            PokedexScreen()
+            //RadioButtonComponent()
             //VisibilityComponent()
            /* Box(modifier = Modifier.fillMaxSize().padding(16.dp),
                 contentAlignment = Alignment.Center) {

@@ -1,10 +1,13 @@
 package com.geovannycode.composecourse2024.composables
 
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,13 +33,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.geovannycode.composecourse2024.R
 import com.geovannycode.composecourse2024.previews.MyPreviewDefault
 import com.geovannycode.composecourse2024.previews.MyPreviewWithoutBackground
 import com.geovannycode.composecourse2024.ui.theme.BackgrounTopBar
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 
 
 data class Pokemon(
@@ -50,15 +54,21 @@ fun getPrkemons() = (1..151).map {
     Pokemon(
         id = it,
         name = "Pokemon $it",
-        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$it.png",
-        type = if (it in 1..49) "Planta" else if (it in 50..100) "Agua" else "Fuego"
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
+        listOf("Fire", "Water", "Grass", "Electric").random()
     )
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PokedexScreen() {
+
+    val context = LocalContext.current
+
+    val pokemonFilter: Map<String, List<Pokemon>> = getPrkemons().groupBy {
+        it.type
+    }
 
     Scaffold(
         topBar = {
@@ -98,13 +108,35 @@ fun PokedexScreen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues),
+            contentPadding = PaddingValues(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.Start
         ) {
+            pokemonFilter.forEach {
+                stickyHeader {
+                    Box(
+                        modifier = Modifier.fillMaxWidth().background(BackgrounTopBar).padding(4.dp)
+                    ) {
+                        Text(text = it.key, color = Color.White)
+                    }
+                }
+                items(it.value) { pokemon ->
+                    PokemonItem(
+                        pokemon = pokemon,
+                        context = context
+                    )
+                }
+            }
+            /*
             items(getPrkemons()) { pokemon ->
                 PokemonItem(
-                    pokemon = pokemon
+                    pokemon = pokemon,
+                    context = context
                 )
             }
+
+             */
         }
     }
 }
@@ -112,7 +144,8 @@ fun PokedexScreen() {
 @Composable
 fun PokemonItem(
     modifier: Modifier = Modifier,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    context: Context
 ) {
     Card(
         border = BorderStroke(
@@ -130,17 +163,26 @@ fun PokemonItem(
     ) {
         Column {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                Image(
+                /*Image(
                     painter = painterResource(id = R.drawable.template),
                     contentDescription = "Pokemon"
+                )*/
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(pokemon.imageUrl)
+                        .crossfade(1000)
+                        .build(),
+                    contentDescription = "Pokemon",
+                    //contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                    //modifier = Modifier.fillMaxWidth()
                 )
             }
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .background(BackgrounTopBar)
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
@@ -165,7 +207,7 @@ fun PokemonItemPreview() {
             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
             type = "Fuego"
         ),
-        //context = LocalContext.current
+        context = LocalContext.current
     )
 }
 
