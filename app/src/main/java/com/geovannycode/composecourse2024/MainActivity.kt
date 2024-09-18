@@ -21,6 +21,7 @@ import com.geovannycode.composecourse2024.composables.RadioButtonComponent
 import com.geovannycode.composecourse2024.composables.TextBasic
 import com.geovannycode.composecourse2024.exercises.CardPresentation
 import com.geovannycode.composecourse2024.exercises.CounterContent
+import com.geovannycode.composecourse2024.exercises.TextComplete
 import com.geovannycode.composecourse2024.exercises.VisibilityComponent
 import com.geovannycode.composecourse2024.ui.theme.ComposeCourse2024Theme
 
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             //CounterContent()
             //TextBasic()
-            PokedexScreen()
+            //PokedexScreen()
+            TextComplete()
             //RadioButtonComponent()
             //VisibilityComponent()
            /* Box(modifier = Modifier.fillMaxSize().padding(16.dp),
